@@ -1,0 +1,1 @@
+UsefulTools is a program that contains various... useful tools. Use any of them as you wish. Not all of them may function as expected, and this project is still in alpha testing. And I still suck at programming. So please be patient for future updates. The project will become a .exe file soon (when I find out why pyinstaller isn't working).
