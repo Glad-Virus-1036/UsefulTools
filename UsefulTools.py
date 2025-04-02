@@ -5,35 +5,58 @@ import random
 import sympy.physics.units as u
 
 def clipboard():
-    data = {}
     file_path = os.path.join(os.path.dirname(__file__), 'clipboard.json')
 
     if not os.path.exists(file_path):
         with open(file_path, 'w') as f:
-            json.dump(data, f)
-    
-    else:
-        with open(file_path, 'r') as f:
-            data = json.load(f)
+            json.dump({"texts": []}, f)
 
-    userinput = input('Enter the text you want to save: ')
-    
-    data['text'] = userinput
+    with open(file_path, 'r') as f:
+        data = json.load(f)
 
-    with open(file_path, 'w') as f:
-        json.dump(data, f)
+    while True:
+        print("Clipboard Menu:")
+        print("1. Add text to clipboard")
+        print("2. View clipboard contents")
+        print("3. Clear clipboard")
+        print("4. Exit")
+        choice = input("Select an option: ")
 
-    user_choice = input('Would you like to see what is currently in the clipboard? (y/n): ')  
-    
-    if user_choice.lower() == 'y':
+        if choice == '1':
+            os.system('cls' if os.name == 'nt' else 'clear')
+            userinput = input("Enter the text you want to save: ")
+            data["texts"].append(userinput)
+            with open(file_path, 'w') as f:
+                json.dump(data, f)
+            print("Text saved to clipboard.")
+            input('Press Enter to continue...')
         
-        with open(file_path, 'r') as f:
-            data = json.load(f)
+        elif choice == '2':
+            os.system('cls' if os.name == 'nt' else 'clear')
+            if data["texts"]:
+                print("Clipboard contents:")
+                for i, text in enumerate(data["texts"], 1):
+                    print(f"{i}. {text}")
+            else:
+                print("Clipboard is empty.")
+            input("Press Enter to continue...")
         
-        print(data.get('text', 'No text found in clipboard.'))
-        input('Press Enter to continue...')
-    
-    else:
+        elif choice == '3':
+            os.system('cls' if os.name == 'nt' else 'clear')
+            data["texts"] = []
+            with open(file_path, 'w') as f:
+                json.dump(data, f)
+            print("Clipboard cleared.")
+            input('Press Enter to continue...')
+        
+        elif choice == '4':
+            os.system('cls' if os.name == 'nt' else 'clear')
+            break
+        
+        else:
+            print("Please select one of the numbers.")
+            input('Press Enter to continue...')
+
         os.system('cls' if os.name == 'nt' else 'clear')
 
 def converter():
@@ -69,7 +92,7 @@ def converter():
 
 while True:
     try:
-        print('Welcome to UsefulTools v1.0.1-alpha. Select a tool:')
+        print('Welcome to UsefulTools v1.0.2-alpha. Select a tool:')
         print('1. Center Mouse')
         print('2. Clipboard')
         print('3. Quick Converter')
@@ -80,11 +103,8 @@ while True:
         choice = input('Select a number: ')
         print('\n')
 
-        if choice != ['1', '2', '3', '4']:
-            raise ValueError
-    
-    except ValueError:
-        print('Please select one of the numbers.')
+    except json.JSONDecodeError:
+        print('placeholder')
 
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -94,14 +114,14 @@ while True:
         input('Press Enter to continue...')
         os.system('cls' if os.name == 'nt' else 'clear')
     
-    if choice == '2':
+    elif choice == '2':
         clipboard()
         os.system('cls' if os.name == 'nt' else 'clear')
     
-    if choice == '3':
+    elif choice == '3':
         converter()
     
-    if choice == '4':
+    elif choice == '4':
         print('Welcome to the Random Number Picker.')
         try:
             print('Enter the minimum number: ')
@@ -116,7 +136,7 @@ while True:
         input('Press Enter to continue...')
         os.system('cls' if os.name == 'nt' else 'clear')
 
-    if choice == '5':
+    elif choice == '5':
         print('Welcome to the Changelog. Here you can see UsefulTools\'... changelog.')
         input('Press Enter to continue...')
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -124,3 +144,8 @@ while True:
         print('Welcome to the Changelog!\nVersion v1.0.0-alpha had nothing interesting so I didn\'t bother to add it here.\nVersion v1.0.1-alpha includes the Changelog, and makes it so you don\'t need to change the path directory for the clipboard function (or so I hope).\nNote: Changelog, for optimization purposes, only covers the latest version.')
         input('Press Enter to continue...')
         os.system('cls' if os.name == 'nt' else 'clear')
+
+    else:
+        print('Please select one of the numbers.')
+        input('Press Enter to continue...')
+
