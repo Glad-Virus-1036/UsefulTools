@@ -5,29 +5,29 @@ import random
 import sympy.physics.units as u
 
 def clipboard():
-
     data = {}
+    file_path = os.path.join(os.path.dirname(__file__), 'clipboard.json')
 
-    if not os.path.exists('path'):
-        with open('path', 'w') as f:
+    if not os.path.exists(file_path):
+        with open(file_path, 'w') as f:
             json.dump(data, f)
     
     else:
-        with open('path', 'r') as f:
+        with open(file_path, 'r') as f:
             data = json.load(f)
 
     userinput = input('Enter the text you want to save: ')
     
     data['text'] = userinput
 
-    with open('path', 'w') as f:
+    with open(file_path, 'w') as f:
         json.dump(data, f)
 
     user_choice = input('Would you like to see what is currently in the clipboard? (y/n): ')  
     
     if user_choice.lower() == 'y':
         
-        with open('path', 'r') as f:
+        with open(file_path, 'r') as f:
             data = json.load(f)
         
         print(data.get('text', 'No text found in clipboard.'))
@@ -69,11 +69,12 @@ def converter():
 
 while True:
     try:
-        print('Welcome to UsefulTools v1.0.0-alpha. Select a tool:')
+        print('Welcome to UsefulTools v1.0.1-alpha. Select a tool:')
         print('1. Center Mouse')
         print('2. Clipboard')
         print('3. Quick Converter')
         print('4. Random Number Picker')
+        print('NEW: 5. Changelog')
         print('\n')
     
         choice = input('Select a number: ')
@@ -112,5 +113,14 @@ while True:
             continue
         
         print(random.randint(min, max))
+        input('Press Enter to continue...')
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+    if choice == '5':
+        print('Welcome to the Changelog. Here you can see UsefulTools\'... changelog.')
+        input('Press Enter to continue...')
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print('v1.0.1-alpha')
+        print('Welcome to the Changelog!\nVersion v1.0.0-alpha had nothing interesting so I didn\'t bother to add it here.\nVersion v1.0.1-alpha includes the Changelog, and makes it so you don\'t need to change the path directory for the clipboard function (or so I hope).\nNote: Changelog, for optimization purposes, only covers the latest version.')
         input('Press Enter to continue...')
         os.system('cls' if os.name == 'nt' else 'clear')
