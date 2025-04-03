@@ -21,6 +21,8 @@ Random Number Picker: Picks a random number.
 
 Changelog: UsefulTools' changelog.
 
+NOTE: If one day UsefulTools.py becomes an exe file, your antivirus might thing it's a virus (thank you u/rhubarbst on Reddit for warning me). It's completely safe. You can test that theory with a VM (there are virtual machines online that can help you with that).
+
 And that concludes the README file. I'll change it accordingly to what people say about it and the updates I make to UsefulTools.
 Again, thank you for downloading!
 
