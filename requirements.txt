@@ -1,0 +1,6 @@
+This is the requirements.txt file for UsefulTools. You will need these packages for UsefulTools to run properly:
+
+keyboard
+sympy
+
+To install them, press Win + R, type in "cmd", and in the terminal, type "pip install" + the package you need to install.
